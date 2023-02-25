@@ -16,7 +16,15 @@
                 <p class="text-gray-700"><strong class="text-gray-500">Description:</strong><br/>{{ item.description }}</p>
             {% endif %}
 
-            <a href="#" class="inline-block mt-6 px-6 py-3 font-semibold bg-teal-500 text-white text-lg rounded-xl hover:bg-teal-700">Contact seller</a>
+            {% if request.user == item.created_by%}
+                <div class="mt-6 p-6 bg-white rounded-xl">
+                    <p>This is your item!</p>
+                    <a href="{% url 'item:edit' item.id %}" class="inline-block mt-6 px-6 py-3 text-white font-semibold bg-teal-500 text-lg rounded-xl">Edit</a>
+                    <a href="{% url 'item:delete' item.id %}" class="inline-block mt-6 px-6 py-3 text-white font-semibold bg-red-500 text-lg rounded-xl">Delete</a>
+                </div>
+            {% else %}
+                <a href="#" class="inline-block mt-6 px-6 py-3 font-semibold bg-teal-500 text-white text-lg rounded-xl hover:bg-teal-700">Contact seller</a>
+            {% endif %}
         </div>
         
     </div>
@@ -34,7 +42,6 @@
                     </div>
                 </div>
             {% endfor %}
-               
         </div>
     </div>
 
